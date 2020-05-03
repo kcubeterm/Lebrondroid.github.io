@@ -1,0 +1,17 @@
+---
+layout: page
+title: Learn more earn more
+permalink: /about
+comments: true
+---
+
+<div class="row justify-content-between">
+<div class="col-md-8 pr-5">
+
+<p>This website is fully devoted for those, who is new in termux  or the person who know linux but slightly confused about termux,so here we discuss about issue ,new packages in termux. we discuss about proot environment linux also.</p>
+
+<h4>Explore Now</h4>
+<a href="/index.html">Homepage</a>
+
+</div>
+</div>

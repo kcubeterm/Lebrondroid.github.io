@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="icon" href="/assets/images/logo.png">
+
+<title>How to setup apache server in termux. | Hindux</title>
+
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>How to setup apache server in termux. | Hindux</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="How to setup apache server in termux." />
+<meta name="author" content="kcubeterm" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Steps to setup apache webserver in termux environment for hosting as well other purposes" />
+<meta property="og:description" content="Steps to setup apache webserver in termux environment for hosting as well other purposes" />
+<link rel="canonical" href="http://localhost:4000/setup-apache-server-in-termux/" />
+<meta property="og:url" content="http://localhost:4000/setup-apache-server-in-termux/" />
+<meta property="og:site_name" content="Hindux" />
+<meta property="og:image" content="http://localhost:4000/assets/images/apache.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-30T00:00:00+05:30" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"kcubeterm"},"description":"Steps to setup apache webserver in termux environment for hosting as well other purposes","url":"http://localhost:4000/setup-apache-server-in-termux/","headline":"How to setup apache server in termux.","dateModified":"2020-04-30T00:00:00+05:30","datePublished":"2020-04-30T00:00:00+05:30","@type":"BlogPosting","image":"http://localhost:4000/assets/images/apache.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/setup-apache-server-in-termux/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/images/logo.png"},"name":"kcubeterm"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+<link href="/assets/css/screen.css" rel="stylesheet">
+
+<link href="/assets/css/main.css" rel="stylesheet">
+
+<script src="/assets/js/jquery.min.js"></script>
+
+</head>
+
+
+
+
+<body class="layout-post">
+	<!-- defer loading of font and font awesome -->
+	<noscript id="deferred-styles">
+		<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	</noscript>
+
+
+<!-- Begin Menu Navigation
+================================================== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+
+    <div class="container pr-0">
+
+    <!-- Begin Logo -->
+    <a class="navbar-brand" href="/">
+    <img src="/assets/images/logo.png" alt="Hindux">
+    </a>
+    <!-- End Logo -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMediumish">
+
+        <!-- Begin Menu -->
+
+            <ul class="navbar-nav ml-auto">
+
+                
+                <li class="nav-item">
+                
+                <a class="nav-link" href="/index.html">Blog</a>
+                </li>
+
+                <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/"> Docs</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://www.wowthemes.net/themes/mediumish-wordpress/"><i class="fab fa-wordpress-simple"></i> WP Version</a>
+                </li>
+                
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://github.com/Hindux/Hindux.github.io"><i class="fab fa-github"></i> Fork on Github</a>
+                </li>
+
+                <script src="/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+
+            </ul>
+
+        <!-- End Menu -->
+
+    </div>
+
+    </div>
+</nav>
+<!-- End Navigation
+================================================== -->
+
+<div class="site-content">
+
+<div class="container">
+
+<!-- Site Title
+================================================== -->
+<div class="mainheading">
+    <h1 class="sitetitle">Hindux</h1>
+    <p class="lead">
+        Learn linux with termux
+    </p>
+</div>
+
+<!-- Content
+================================================== -->
+<div class="main-content">
+    <div class="container">
+    <div class="row">
+
+  
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=How to setup apache server in termux.&url=http://localhost:4000/setup-apache-server-in-termux/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=http://localhost:4000/setup-apache-server-in-termux/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/setup-apache-server-in-termux/" onclick="window.open(this.href, 'width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+</div>
+
+        </div>
+
+ 
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+             
+                
+                <div class="row post-top-meta">
+                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                        
+                        <img class="author-thumb" src="/assets/images/krishna.jpeg" alt="Krishna">
+                        
+                    </div>
+                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                        <a target="_blank" class="link-dark" href="">Krishna</a><a target="_blank" href="https://twitter.com/kcubeterm" class="btn follow">Follow</a>
+                        <span class="author-description"></span>
+                    </div>
+                </div>
+                
+
+                <h1 class="posttitle">How to setup apache server in termux.</h1>
+
+            </div>
+
+            
+
+            
+            <img class="featured-image img-fluid" src="/assets/images/apache.jpg" alt="How to setup apache server in termux.">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                    
+                    <div class="toc mt-4 mb-4 lead">
+                        <h3 class="font-weight-bold">Summary</h3>
+                        <ul>
+  <li><a href="#what-is-apache-server-">What is apache server ?</a></li>
+  <li><a href="#requirement">Requirement.</a>
+    <ul>
+      <li><a href="#install-apache">Install apache</a></li>
+      <li><a href="#setup-config">setup config</a>
+        <ul>
+          <li><a href="#step-1configure-listen">Step 1:configure listen</a></li>
+          <li><a href="#step-2set-servername">step 2:set ServerName</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#putting-content-for-serving">Putting content for serving</a></li>
+  <li><a href="#access-server-from-remote">Access server from remote</a>
+    <ul>
+      <li><a href="#ngrok-port-forwarding">Ngrok port forwarding</a></li>
+    </ul>
+  </li>
+</ul>
+                    </div>
+                
+                <!-- End Toc -->
+                <h4 id="what-is-apache-server-">What is apache server ?</h4>
+<blockquote>
+  <p>The Apache HTTP Server, colloquially called Apache, is a free and open-source cross-platform web server software, released under the terms of Apache License 2.0. Apache is developed and maintained by an open community of developers under the auspices of the Apache Software Foundation</p>
+</blockquote>
+
+<p>it is web server.The job of a web server is to serve websites on the internet. To achieve that goal, it acts as a middleman between the server and client machines. It pulls content from the server on each user request and delivers it to the web.</p>
+
+<h4 id="requirement">Requirement.</h4>
+<p>Here i am going to setup apache2, it’s second version of apache or you can say enhanched version.</p>
+
+<h5 id="install-apache">Install apache</h5>
+<p>Before any installion make sure you have updated your terminal packages.</p>
+<pre><code class="language-`">pkg upgrade
+pkg install apache2
+
+</code></pre>
+<h5 id="setup-config">setup config</h5>
+<p>if you are using termux then you can find config file in <strong>/data/data/com.termux/files/usr/etc/apache2/</strong>
+the name of config file will be httpd.conf</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>cd /data/data/com.termux/files/usr/etc/apache2
+ls
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>after execution of above command you should get httpd.conf</p>
+
+<p>Config is the important part of settings anythings, here open the <strong>httpd.conf</strong> (config) file with your favourite editor.</p>
+<h6 id="step-1configure-listen">Step 1:configure listen</h6>
+<p>after opening httpd.conf  , find <strong>Listen 8080</strong> and replace it with <strong>Listen 0.0.0.0:8080</strong> here ip 0.0.0.0 means apache server listen all available ip ,you can list your ip or interface with <code class="highlighter-rouge">ifconfig</code>.
+if you face problem in finding, use grep to find pattern.like this <code class="highlighter-rouge">grep -n 'Listen ' httpd.conf</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>grep -n 'Listen ' httpd.conf
+48:# Change this to Listen on specific IP addresses as shown below to
+51:#Listen 12.34.56.78:80
+52:Listen 8080
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>you can see in my case listen found in line 52.</p>
+
+<h6 id="step-2set-servername">step 2:set ServerName</h6>
+<p>i hope you did step 1 without any error. now set servername, you can choose any name for your server for now.
+like suppose i choose termux then write <code class="highlighter-rouge">ServerName termux</code> in last line or any blank line
+when you got error like following, it means you have to set ServerName</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>$apachectl
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, 
+using 127.0.0.1. Set the 'ServerName' directive globally to suppress this message
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>after setup servername run <code class="highlighter-rouge">apachectl </code> and go to <a href="http://localhost:8080">http://localhost:8080</a>
+if all things have done nice then your browser should show like following
+<img src="/assets/images/itswork.jpg" alt=" alt it's work " /></p>
+
+<p>all the setup have done now ,you would thinking ,how can i change above content into my own content,so dont worry, follow one more steps.</p>
+
+<h4 id="putting-content-for-serving">Putting content for serving</h4>
+<p>so now go to <strong>/data/data/com.termux/files/usr/share/apache2/default-site/htdocs</strong> here you find index.html
+if you know html then change it. and restart your apache server</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>apachectl stop
+apachectl 
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="access-server-from-remote">Access server from remote</h4>
+<p>your server is listen on 0.0.0.0 ,it means all available ip, check available ip by <code class="highlighter-rouge">ifconfig</code>
+if you connect with hotspot and wifi then your server can be access from other device if that device connected on same hotspot or router</p>
+
+<p>for accessing your server from remote is that port forwarding, you can either forward port through router or ftom service like ngrok or serveo.</p>
+
+<h5 id="ngrok-port-forwarding">Ngrok port forwarding</h5>
+
+<p>you can download ngrok executable by official site , for downloading ngrok in android</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>cd ~/
+wget --no-check-certificate https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip
+unzip ngrk-stable-linux-arm.zip
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>now execute <code class="highlighter-rouge">./ngrok http 8080</code>
+it prompt and connecting to his server and making tunnel, and it provide you ,link like https://ishsksbsks.ngrok.io but not this one</p>
+
+<p>now copy that link which ngrok gave you , from that link you can access your server from anywhere in world.
+ngrok has limitation for free account.</p>
+
+<p>i use this for demo only, you can other service or port forwarding from router and use <a href="https://freedns.afraid.org/">freedns</a> as dynamic dns server for updating your ips,
+<a href="/setup-php-with-apache-in-termux/">integrate php with apache</a>
+<strong>i hope you enjoyed this tutorial</strong>*</p>
+
+<p><strong>Enlighten others by sharing it</strong>*</p>
+
+
+            </div>
+
+            
+            
+            <div class="rating mb-4 d-flex align-items-center">
+                <strong class="mr-1">Rating:</strong> <div class="rating-holder">
+<div class="c-rating c-rating--regular" data-rating-value="4.5">
+  <button>1</button>
+  <button>2</button>
+  <button>3</button>
+  <button>4</button>
+  <button>5</button>
+</div>
+</div>
+            </div>
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2020-04-30">30 Apr 2020</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/categories#termux">termux</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#apache">#apache</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#server">#server</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="http://localhost:4000/play-audio-in-termux-chroot/"> &laquo; How to play audio in termux chroot or proot OS like Arch Debian Ubuntu etc</a>
+            
+            
+            <a class="next d-block col-md-6 text-lg-right" href="http://localhost:4000/setup-php-with-apache-in-termux/">How to integrate php and apache in linux and termux. &raquo; </a>
+            
+            <div class="clearfix"></div>
+            </div>
+            <!-- End Categories -->
+
+        </div>
+      
+
+    </div>
+</div>
+
+
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Under Header -->
+<ins class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-1900801628395937"
+    data-ad-slot="9061350925"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br/>
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Review",
+  "itemReviewed": {
+    "@type": "Thing",
+    "name": "How to setup apache server in termux."
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Krishna"
+  },
+  "datePublished": "2020-04-30",
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "4.5",
+    "bestRating": "5"
+  }
+}
+</script>
+
+</div>
+
+
+<!-- Bottom Alert Bar
+================================================== -->
+<div class="alertbar">
+	<div class="container text-center">
+		<span><img src="/assets/images/logo.png" alt="Hindux"> &nbsp; Never miss a <b>story</b> from us, subscribe to our newsletter</span>
+        <form action="https://github.us8.list-manage.com/subscribe/post?u=453c83341cc15b30c5f954c26&amp;id=fd1d0e0d3f" method="post" name="mc-embedded-subscribe-form" class="wj-contact-form validate" target="_blank" novalidate>
+            <div class="mc-field-group">
+            <input type="email" placeholder="Email" name="EMAIL" class="required email" id="mce-EMAIL" autocomplete="on" required>
+            <input type="submit" value="Subscribe" name="subscribe" class="heart">
+            </div>
+        </form>
+	</div>
+</div>
+
+    
+</div>
+
+<!-- Categories Jumbotron
+================================================== -->
+<div class="jumbotron fortags">
+	<div class="d-md-flex h-100">
+		<div class="col-md-4 transpdark align-self-center text-center h-100">
+            <div class="d-md-flex align-items-center justify-content-center h-100">
+                <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
+            </div>
+		</div>
+		<div class="col-md-8 p-5 align-self-center text-center">
+            
+            
+                
+                    <a class="mt-1 mb-1" href="/categories#termux-chroot">termux-chroot (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/categories#termux">termux (3)</a>
+                
+            
+            
+		</div>
+	</div>
+</div>
+
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                Copyright © 2020 Hindux 
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">    
+                <a target="_blank" href="https://github.com/kcubeterm/">Hindux</a> Disigned by kcubeterm
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer
+================================================== -->
+
+</div> <!-- /.site-content -->
+
+<!-- Scripts
+================================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script src="/assets/js/mediumish.js"></script>
+
+
+
+<script src="/assets/js/ie10-viewport-bug-workaround.js"></script> 
+
+
+<script id="dsq-count-scr" src="//hindux.disqus.com/count.js"></script>
+
+
+</body>
+</html>

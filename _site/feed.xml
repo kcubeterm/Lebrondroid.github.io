@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hindux</title>
+    <description>Learn linux with termux</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 03 May 2020 22:10:54 +0530</pubDate>
+    <lastBuildDate>Sun, 03 May 2020 22:10:54 +0530</lastBuildDate>
+    <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Setup Gui ,vncserver,x11 and desktop environment in termux</title>
+        <description>&lt;p&gt;This is world of Graphical User Interface, everyone like gui program
+ so similar to linux ,termux have also lot’s of gui program in the separate repo&lt;/p&gt;
+
+&lt;h4 id=&quot;subscribe-x11-repo&quot;&gt;Subscribe x11-repo&lt;/h4&gt;
+&lt;p&gt;In order to subscribe the x11 repo ,execute following command in termux&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; pkg install x11-repo 
+ 
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;we always recommend that update repo everytime,but since &lt;code class=&quot;highlighter-rouge&quot;&gt;pkg&lt;/code&gt; is wrapper of apt ,its automatically update your terminal and then install your packages&lt;/p&gt;
+
+&lt;h4 id=&quot;requirement&quot;&gt;Requirement&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Vncserver (tigervnc)&lt;/li&gt;
+  &lt;li&gt;GUI program&lt;/li&gt;
+  &lt;li&gt;Atleast 100 mb of internet data.(Desktop environment)&lt;/li&gt;
+  &lt;li&gt;little bit of patience&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;setup-vncserver&quot;&gt;setup vncserver&lt;/h4&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;In computing, Virtual Network Computing is a graphical desktop-sharing system that uses the Remote Frame Buffer protocol to remotely control another computer. It transmits the keyboard and mouse events from one computer to another, relaying the graphical-screen updates back in the other direction, over a network.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;why-vncserver&quot;&gt;why vncserver&lt;/h5&gt;
+&lt;p&gt;Vncserver is needed here because termux does’t support opengles or similar for graphics rendering.
+ By the way we can use xorg server also,but thats not stable in android,thats why i choose vnc.Now you have to install an external vncviewer from playstore
+ install vncviewer with this &lt;a href=&quot;https://play.google.com/store/apps/details?id=com.realvnc.viewer.android&quot;&gt;link&lt;/a&gt; .&lt;/p&gt;
+
+&lt;p&gt;install vncserver&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;pkg install tigervnc
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;after installed, execute vncserver &lt;code class=&quot;highlighter-rouge&quot;&gt;vncserver :1&lt;/code&gt; , 
+here vncserver is command and &lt;code class=&quot;highlighter-rouge&quot;&gt;:1&lt;/code&gt; means the vnc server will run on localhost:5901 or 127.0.0.1:5901&lt;/p&gt;
+
+&lt;p&gt;it may ask for password, you just give it any password,which you can remind easily, while putting password your password won’t prompt because of privacy.
+if your terminal gives output like following,then your vncserver is listening on your specified port.
+&lt;img src=&quot;/assets/images/vnc1.jpg&quot; alt=&quot;vncserver localhost:5901&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;for knowledge purpose:
+sometime you may face issue like following.that time just kill that port, like in following case its is :1 then
+&lt;code class=&quot;highlighter-rouge&quot;&gt;vncserver -kill :1&lt;/code&gt;
+&lt;img src=&quot;/assets/images/Localvnc.jpg&quot; alt=&quot; vncserver &quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;setup-desktop-environmentxfce4&quot;&gt;setup Desktop environment(xfce4)&lt;/h4&gt;
+&lt;p&gt;There are lots of desktop envirinment for linux like Gnome,xfce4,lxde etc,but termux has only xfce4 available right now.
+so install xfce4 by :&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;pkg install xfce4
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;after that set DISPLAY environment variable, on which your gui program interact. if your vncserver run on &lt;code class=&quot;highlighter-rouge&quot;&gt;:1&lt;/code&gt; then set display on 1,and start xfce4 as well.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;export DISPLAY=:1
+startxfce4
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;setup-vncviewer-app&quot;&gt;setup vncviewer app.&lt;/h4&gt;
+&lt;p&gt;step 1: Open vncviewer application. and then click on cross + floating button&lt;/p&gt;
+
+&lt;p&gt;step 2: fill address and name
+&lt;img src=&quot;/assets/images/vncstep2.jpg&quot; alt=&quot;address and name&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;step 3: toggle picture quality on high for best graphics andthen hit connect
+&lt;img src=&quot;/assets/images/vncstep3.jpg&quot; alt=&quot;tiggle high &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;step 4: 
+if it ask for password, provide it, if you have forgot your vncserver password,then dont’t worry.
+come in terminal and change your vncpassword with 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;vncpasswd&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;script-for-summarize&quot;&gt;script for summarize&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;pkg install x11-repo -y
+pkg install tigervnc -y
+pkg install xfce4 -y
+vncserver -kill :1
+vncserver :1
+export DISPLAY=:1
+startxfce4
+
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</description>
+        <pubDate>Sun, 03 May 2020 00:00:00 +0530</pubDate>
+        <link>http://localhost:4000/setup-gui-in-termux/</link>
+        <guid isPermaLink="true">http://localhost:4000/setup-gui-in-termux/</guid>
+        
+        <category>vncserver</category>
+        
+        <category>GUI</category>
+        
+        
+        <category>termux</category>
+        
+      </item>
+    
+      <item>
+        <title>How to integrate php and apache in linux and termux.</title>
+        <description>&lt;p&gt;As we know without backend language webserver is nothing, and php as backened language fulfill your all requirements with webserver, then let’s go&lt;/p&gt;
+
+&lt;h4 id=&quot;requirements&quot;&gt;Requirements&lt;/h4&gt;
+&lt;p&gt;Termux provide a separate package for php and Apache in which all requirements install automatically by that package.
+the name of that package is &lt;strong&gt;php-apache&lt;/strong&gt;  By the way it contains modules which loads by Apache .&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;pkg install php-apache
+
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;and now copy and following in httpd.conf, as i mention in my old &lt;a href=&quot;/setup-apache-server-in-termux&quot;&gt;tutorial&lt;/a&gt;
+after that paste following in httpd.conf in last line.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;LoadModule php7_module libexec/apache2/libphp7.so
+&amp;lt;FilesMatch \.php$&amp;gt; 
+   SetHandler application/x-httpd-php
+&amp;lt;/FilesMatch&amp;gt;
+&amp;lt;IfModule dir_module&amp;gt;
+    DirectoryIndex index.php
+&amp;lt;/IfModule&amp;gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;now the php has linked with apache server, go to document root, the default custom root of apache is &lt;code class=&quot;highlighter-rouge&quot;&gt;/data/data/com.termux/files/usr/share/apache2/default-site/htdocs&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;if you get any type of error, then fresh install all those things, remove php ,apache . fresh installation resolve issues most of the time.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 30 Apr 2020 00:00:00 +0530</pubDate>
+        <link>http://localhost:4000/setup-php-with-apache-in-termux/</link>
+        <guid isPermaLink="true">http://localhost:4000/setup-php-with-apache-in-termux/</guid>
+        
+        <category>php</category>
+        
+        <category>apache</category>
+        
+        
+        <category>termux</category>
+        
+      </item>
+    
+      <item>
+        <title>How to setup apache server in termux.</title>
+        <description>&lt;h4 id=&quot;what-is-apache-server-&quot;&gt;What is apache server ?&lt;/h4&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;The Apache HTTP Server, colloquially called Apache, is a free and open-source cross-platform web server software, released under the terms of Apache License 2.0. Apache is developed and maintained by an open community of developers under the auspices of the Apache Software Foundation&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;it is web server.The job of a web server is to serve websites on the internet. To achieve that goal, it acts as a middleman between the server and client machines. It pulls content from the server on each user request and delivers it to the web.&lt;/p&gt;
+
+&lt;h4 id=&quot;requirement&quot;&gt;Requirement.&lt;/h4&gt;
+&lt;p&gt;Here i am going to setup apache2, it’s second version of apache or you can say enhanched version.&lt;/p&gt;
+
+&lt;h5 id=&quot;install-apache&quot;&gt;Install apache&lt;/h5&gt;
+&lt;p&gt;Before any installion make sure you have updated your terminal packages.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-`&quot;&gt;pkg upgrade
+pkg install apache2
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&quot;setup-config&quot;&gt;setup config&lt;/h5&gt;
+&lt;p&gt;if you are using termux then you can find config file in &lt;strong&gt;/data/data/com.termux/files/usr/etc/apache2/&lt;/strong&gt;
+the name of config file will be httpd.conf&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;cd /data/data/com.termux/files/usr/etc/apache2
+ls
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;after execution of above command you should get httpd.conf&lt;/p&gt;
+
+&lt;p&gt;Config is the important part of settings anythings, here open the &lt;strong&gt;httpd.conf&lt;/strong&gt; (config) file with your favourite editor.&lt;/p&gt;
+&lt;h6 id=&quot;step-1configure-listen&quot;&gt;Step 1:configure listen&lt;/h6&gt;
+&lt;p&gt;after opening httpd.conf  , find &lt;strong&gt;Listen 8080&lt;/strong&gt; and replace it with &lt;strong&gt;Listen 0.0.0.0:8080&lt;/strong&gt; here ip 0.0.0.0 means apache server listen all available ip ,you can list your ip or interface with &lt;code class=&quot;highlighter-rouge&quot;&gt;ifconfig&lt;/code&gt;.
+if you face problem in finding, use grep to find pattern.like this &lt;code class=&quot;highlighter-rouge&quot;&gt;grep -n 'Listen ' httpd.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;grep -n 'Listen ' httpd.conf
+48:# Change this to Listen on specific IP addresses as shown below to
+51:#Listen 12.34.56.78:80
+52:Listen 8080
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;you can see in my case listen found in line 52.&lt;/p&gt;
+
+&lt;h6 id=&quot;step-2set-servername&quot;&gt;step 2:set ServerName&lt;/h6&gt;
+&lt;p&gt;i hope you did step 1 without any error. now set servername, you can choose any name for your server for now.
+like suppose i choose termux then write &lt;code class=&quot;highlighter-rouge&quot;&gt;ServerName termux&lt;/code&gt; in last line or any blank line
+when you got error like following, it means you have to set ServerName&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$apachectl
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, 
+using 127.0.0.1. Set the 'ServerName' directive globally to suppress this message
+
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;after setup servername run &lt;code class=&quot;highlighter-rouge&quot;&gt;apachectl &lt;/code&gt; and go to &lt;a href=&quot;http://localhost:8080&quot;&gt;http://localhost:8080&lt;/a&gt;
+if all things have done nice then your browser should show like following
+&lt;img src=&quot;/assets/images/itswork.jpg&quot; alt=&quot; alt it's work &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;all the setup have done now ,you would thinking ,how can i change above content into my own content,so dont worry, follow one more steps.&lt;/p&gt;
+
+&lt;h4 id=&quot;putting-content-for-serving&quot;&gt;Putting content for serving&lt;/h4&gt;
+&lt;p&gt;so now go to &lt;strong&gt;/data/data/com.termux/files/usr/share/apache2/default-site/htdocs&lt;/strong&gt; here you find index.html
+if you know html then change it. and restart your apache server&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;apachectl stop
+apachectl 
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;access-server-from-remote&quot;&gt;Access server from remote&lt;/h4&gt;
+&lt;p&gt;your server is listen on 0.0.0.0 ,it means all available ip, check available ip by &lt;code class=&quot;highlighter-rouge&quot;&gt;ifconfig&lt;/code&gt;
+if you connect with hotspot and wifi then your server can be access from other device if that device connected on same hotspot or router&lt;/p&gt;
+
+&lt;p&gt;for accessing your server from remote is that port forwarding, you can either forward port through router or ftom service like ngrok or serveo.&lt;/p&gt;
+
+&lt;h5 id=&quot;ngrok-port-forwarding&quot;&gt;Ngrok port forwarding&lt;/h5&gt;
+
+&lt;p&gt;you can download ngrok executable by official site , for downloading ngrok in android&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;cd ~/
+wget --no-check-certificate https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip
+unzip ngrk-stable-linux-arm.zip
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;now execute &lt;code class=&quot;highlighter-rouge&quot;&gt;./ngrok http 8080&lt;/code&gt;
+it prompt and connecting to his server and making tunnel, and it provide you ,link like https://ishsksbsks.ngrok.io but not this one&lt;/p&gt;
+
+&lt;p&gt;now copy that link which ngrok gave you , from that link you can access your server from anywhere in world.
+ngrok has limitation for free account.&lt;/p&gt;
+
+&lt;p&gt;i use this for demo only, you can other service or port forwarding from router and use &lt;a href=&quot;https://freedns.afraid.org/&quot;&gt;freedns&lt;/a&gt; as dynamic dns server for updating your ips,
+&lt;a href=&quot;/setup-php-with-apache-in-termux/&quot;&gt;integrate php with apache&lt;/a&gt;
+&lt;strong&gt;i hope you enjoyed this tutorial&lt;/strong&gt;*&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Enlighten others by sharing it&lt;/strong&gt;*&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 30 Apr 2020 00:00:00 +0530</pubDate>
+        <link>http://localhost:4000/setup-apache-server-in-termux/</link>
+        <guid isPermaLink="true">http://localhost:4000/setup-apache-server-in-termux/</guid>
+        
+        <category>apache</category>
+        
+        <category>server</category>
+        
+        
+        <category>termux</category>
+        
+      </item>
+    
+      <item>
+        <title>How to play audio in termux chroot or proot OS like Arch Debian Ubuntu etc</title>
+        <description>&lt;h4 id=&quot;follow-now&quot;&gt;follow now&lt;/h4&gt;
+&lt;p&gt;The term chroot refers to a process of creating a virtualized environment in a Unix operating system, separating it from the main operating system and directory structure. that’s why we can use it separtely for many purposes like testings,building etc&lt;/p&gt;
+
+&lt;p&gt;Now before doing anything you must have your termux repo updated and pulseaudio installed
+for install pulseaudio ,execute following script&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;pkg install pulseaudio -y
+
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Now copy and paste follwing command in terminal&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;pulseaudio --start --exit-idle-time=-1
+pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;after that make sure you havent get any error.
+now open chroot ,i mean your linux which you have installed in termux(smart geek)
+and set the pulse server&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;export PULSE_SERVER=127.0.0.1
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;your setup has finished ,play audio in linux ,the audio should works.
+if that does’t work please contact us.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 29 Apr 2020 00:00:00 +0530</pubDate>
+        <link>http://localhost:4000/play-audio-in-termux-chroot/</link>
+        <guid isPermaLink="true">http://localhost:4000/play-audio-in-termux-chroot/</guid>
+        
+        <category>chroot</category>
+        
+        <category>audio</category>
+        
+        
+        <category>termux-chroot</category>
+        
+      </item>
+    
+  </channel>
+</rss>
